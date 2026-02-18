@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: food-delivery
+
+  datasource:
+    url: jdbc:postgresql://postgres:5432/deliverydb
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+    hikari:
+      connection-timeout: 30000           # 30s
+      validation-timeout: 5000
+      maximum-pool-size: 10
+      idle-timeout: 300000                # 5 min
+      initialization-fail-timeout: 0
+
+  jpa:
+    hibernate:
+      ddl-auto: update                  # or validate / none in production
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        # dialect: org.hibernate.dialect.PostgreSQLDialect   # usually auto-detected
