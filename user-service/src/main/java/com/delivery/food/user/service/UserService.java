@@ -7,6 +7,14 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+/**
+ * Service interface for user management.
+ *
+ * <p>This interface defines the contract for user operations.
+ * Implementations should handle business logic, validation, and orchestration.
+ * In production, add caching (e.g. @Cacheable for findById) if reads are frequent.
+ * </p>
+ */
 public interface UserService {
 
     UserResponseDto create(UserCreateDto dto);
@@ -39,13 +47,29 @@ public interface UserService {
     UserResponseDto update(Long id, UserUpdateDto dto);
 
     /**
-     * Get all users with pagination and sorting
+     * Lists all users with pagination and sorting.
      *
-     * @return list of users with pagination
+     * <p>This method supports pagination to avoid loading all records at once, which is critical for scalability.
+     * Sorting is handled by Pageable (e.g., sort by fullName asc).
+     * In production, consider adding filters (e.g. by role) via QueryDSL or Specification for flexibility.
+     * </p>
+     *
+     * @param pageable pagination and sorting parameters (page, size, sort)
+     * @return Page of UserResponseDto
      */
     Page<UserResponseDto> findAll(Pageable pageable);
 
-    // Optional: with simple filter example
+    /**
+     * Lists active users with pagination and sorting.
+     *
+     * <p>Similar to findAll but filtered by active=true.
+     * This is an example of a simple filter; for more complex ones, use Specification<User> in the repository.
+     * </p>
+     *
+     * @param active the active status (true/false)
+     * @param pageable pagination and sorting
+     * @return Page of UserResponseDto
+     */
     Page<UserResponseDto> findAllByActive(boolean active, Pageable pageable);
 
     /**

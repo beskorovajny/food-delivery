@@ -7,7 +7,6 @@ import com.delivery.food.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -21,9 +20,6 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserController {
-    private static final int DEFAULT_PAGE = 0;
-    private static final int DEFAULT_SIZE = 20;
-    private static final String DEFAULT_SORT = "id,asc";
 
     private final UserService userService;
 
@@ -44,7 +40,8 @@ public class UserController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<UserResponseDto> partialUpdate(@PathVariable Long id, @Valid @RequestBody UserUpdateDto dto) {
+    public ResponseEntity<UserResponseDto> partialUpdate(
+            @PathVariable Long id, @Valid @RequestBody UserUpdateDto dto) {
         return ResponseEntity.ok(userService.update(id, dto));
     }
 
