@@ -1,33 +1,69 @@
-HELP.md
+# Maven
 target/
+*.log
+*.class
+
+# Maven Wrapper
 .mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
+# IDE files
+.idea/
 *.iml
-*.ipr
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
+*.iws
 .vscode/
+.classpath
+.project
+.settings/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Editor directories and files
+*~
+*.swp
+*.swo
+*.swn
+*.bak
+*~
+
+# Build artifacts
+build/
+dist/
+out/
+
+# Dependency directories (if you use npm/yarn in some module)
+node_modules/
+
+# Logs & temp files
+logs/
+tmp/
+temp/
+
+# Docker
+*.dockerignore
+Dockerfile.*
+docker-compose.override.yml
+
+# Environment files (secrets)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Database files (if any local H2/HSQLDB)
+*.h2.db
+*.mv.db
+*.trace.db
+
+# Gradle (if you ever switch)
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Misc
+*.pid
+*.seed
+*.pid.lock
