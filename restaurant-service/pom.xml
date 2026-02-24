@@ -11,7 +11,7 @@
 	<groupId>com.delivery.food.restaurant</groupId>
 	<artifactId>restaurant-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>restaurant-service</name>
+	<name>Restaurant Service</name>
 	<description>Microservice for restaurant and menu management</description>
 	<url/>
 	<licenses>
@@ -73,6 +73,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webmvc-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>1.6.2</version>
+            <scope>compile</scope>
+        </dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>1.6.2</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 

@@ -16,12 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
+    @Override
     @Transactional
     public UserResponseDto create(UserCreateDto dto) {
         User user = userMapper.toEntity(dto);
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
         return userMapper.toResponseDto(saved);
     }
 
-
+    @Override
     @Transactional(readOnly = true)
     public UserResponseDto findById(Long id) {
         User user = userRepository.findById(id)
@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService {
         return userMapper.toResponseDto(user);
     }
 
+    @Override
     @Transactional(readOnly = true)
     public UserResponseDto findByEmail(String email) {
         User user = userRepository.findByEmail(email)
@@ -47,17 +48,6 @@ public class UserServiceImpl implements UserService {
         return userMapper.toResponseDto(user);
     }
 
-    @Override
-    @Transactional
-    public UserResponseDto update(Long id, UserUpdateDto dto) {
-        User user  = userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
-
-        userMapper.updateFromDto(dto, user);
-
-        User updated = userRepository.save(user);
-        return userMapper.toResponseDto(updated);
-    }
 
     @Override
     @Transactional(readOnly = true)
@@ -73,6 +63,19 @@ public class UserServiceImpl implements UserService {
                 .map(userMapper::toResponseDto);
     }
 
+    @Override
+    @Transactional
+    public UserResponseDto update(Long id, UserUpdateDto dto) {
+        User user  = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
+
+        userMapper.updateFromDto(dto, user);
+
+        User updated = userRepository.save(user);
+        return userMapper.toResponseDto(updated);
+    }
+
+    @Transactional
     @Override
     public void delete(Long id) {
         if (!userRepository.existsById(id)) {
