@@ -37,10 +37,10 @@ public interface MenuItemRepository extends JpaRepository<MenuItem, Long> {
      * <p>Used to load the full menu for a restaurant.
      * </p>
      *
-     * @param restaurant the owning restaurant
+     * @param restaurantId the owning restaurant identifier
      * @return list of menu items
      */
-    Page<MenuItem> findAllByRestaurant(Restaurant restaurant, Pageable pageable);
+    Page<MenuItem> findAllByRestaurantId(Long restaurantId, Pageable pageable);
 
     /**
      * Finds all menu items in a specific category of a restaurant.
@@ -60,11 +60,11 @@ public interface MenuItemRepository extends JpaRepository<MenuItem, Long> {
      * Supports sorting by price, name, popularity, etc.
      * </p>
      *
-     * @param restaurant the restaurant
+     * @param restaurantId the restaurant identifier
      * @param pageable   pagination and sorting parameters
      * @return Page of available menu items
      */
-    Page<MenuItem> findAllByRestaurantAndAvailableTrue(Restaurant restaurant, Pageable pageable);
+    Page<MenuItem> findAllByRestaurantIdAndAvailableTrue(Long restaurantId, Pageable pageable);
 
     /**
      * Finds a menu item by name within a specific restaurant.
@@ -74,8 +74,8 @@ public interface MenuItemRepository extends JpaRepository<MenuItem, Long> {
      * </p>
      *
      * @param name       the item name (case-sensitive)
-     * @param restaurant the owning restaurant
+     * @param restaurantId the owning restaurant identifier
      * @return Optional containing the item if found
      */
-    Optional<MenuItem> findByNameAndRestaurant(String name, Restaurant restaurant);
+    Optional<MenuItem> findByNameAndRestaurantId(String name, Long restaurantId);
 }

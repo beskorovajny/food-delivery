@@ -39,7 +39,7 @@ public interface MenuCategoryRepository extends JpaRepository<MenuCategory, Long
      * @param restaurantId the restaurant identifier whose categories to retrieve
      * @return list of categories (usually small, no pagination needed in most cases)
      */
-    List<MenuCategory> findAllByRestaurant(Long restaurantId);
+    List<MenuCategory> findAllByRestaurantId(Long restaurantId);
 
     /**
      * Finds a category by name within a specific restaurant.
@@ -52,7 +52,7 @@ public interface MenuCategoryRepository extends JpaRepository<MenuCategory, Long
      * @param restaurantId the restaurant identifier
      * @return Optional containing the category if found
      */
-    Optional<MenuCategory> findByNameAndRestaurant(String name, Long restaurantId);
+    Optional<MenuCategory> findByNameAndRestaurantId(String name, Long restaurantId);
 
     /**
      * Retrieves paginated categories for a restaurant.

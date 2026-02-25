@@ -114,7 +114,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new EntityNotFoundException("Restaurant not found with id: " + restaurantId));
 
-        menuCategoryRepository.findByNameAndRestaurant(dto.getName(), restaurantId)
+        menuCategoryRepository.findByNameAndRestaurantId(dto.getName(), restaurant.getId())
                 .ifPresent(existing -> {
                     throw new DuplicateEntityException("Category with name '"
                             + dto.getName() + "' already exists in this restaurant");
@@ -133,11 +133,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     public List<MenuCategoryResponseDto> getCategoriesByRestaurant(Long restaurantId) {
         log.debug("Fetching categories for restaurant id: {}", restaurantId);
 
-        if (!restaurantRepository.existsById(restaurantId)) {
-            throw new EntityNotFoundException("Restaurant not found with id: " + restaurantId);
-        }
-
-        return menuCategoryRepository.findAllByRestaurant(restaurantId)
+        return menuCategoryRepository.findAllByRestaurantId(restaurantId)
                 .stream()
                 .map(restaurantMapper::toResponseDto)
                 .collect(Collectors.toList());
@@ -187,7 +183,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         }
 
         // Check for duplicate item name in this restaurant
-        menuItemRepository.findByNameAndRestaurant(dto.getName(), restaurant)
+        menuItemRepository.findByNameAndRestaurantId(dto.getName(), restaurant.getId())
                 .ifPresent(existing -> {
                     throw new DuplicateEntityException("Menu item with name '"
                             + dto.getName() + "' already exists in this restaurant");
@@ -212,8 +208,7 @@ public class RestaurantServiceImpl implements RestaurantService {
             throw new EntityNotFoundException("Restaurant not found with id: " + restaurantId);
         }
 
-        return menuItemRepository.findAllByRestaurantAndAvailableTrue(
-                        restaurantRepository.getReferenceById(restaurantId), pageable)
+        return menuItemRepository.findAllByRestaurantIdAndAvailableTrue(restaurantId, pageable)
                 .map(restaurantMapper::toResponseDto);
     }
 
