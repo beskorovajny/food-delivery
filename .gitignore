@@ -67,3 +67,7 @@ build/
 *.pid
 *.seed
 *.pid.lock
+
+#Postman
+!postman/*.postman_collection.json
+!postman/*.postman_environment.json

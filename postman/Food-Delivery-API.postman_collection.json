@@ -1,0 +1,494 @@
+{
+  "info": {
+    "_postman_id": "food-delivery-user-restaurant",
+    "name": "Food Delivery API - User & Restaurant",
+    "description": "Postman collection for UserController and RestaurantController endpoints\n\nBase URL: http://localhost:{port}\n\n- User service: port 8082\n- Restaurant service: port 8083\n\nUse variables: {{baseUrlUser}}, {{baseUrlRestaurant}}",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "User Service (port 8082)",
+      "item": [
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"anna.kovalenko@example.com\",\n  \"fullName\": \"Анна Коваленко\",\n  \"phone\": \"+380501234567\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrlUser}}/api/users",
+              "host": [
+                "{{baseUrlUser}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            },
+            "description": "POST /api/users\nCreates a new user (Customer by default)\n\nExpected: 201 Created + UserResponseDto"
+          },
+          "response": []
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlUser}}/api/users/1",
+              "host": [
+                "{{baseUrlUser}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "1"
+              ]
+            },
+            "description": "GET /api/users/{id}\nReturns user details or 404"
+          },
+          "response": []
+        },
+        {
+          "name": "Get User by Email",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlUser}}/api/users/email/anna.kovalenko@example.com",
+              "host": [
+                "{{baseUrlUser}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "email",
+                "anna.kovalenko@example.com"
+              ]
+            },
+            "description": "GET /api/users/email/{email}"
+          },
+          "response": []
+        },
+        {
+          "name": "Update User (PATCH)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Anna Updated\",\n  \"phone\": \"+380991112233\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrlUser}}/api/users/1",
+              "host": [
+                "{{baseUrlUser}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "1"
+              ]
+            },
+            "description": "PATCH /api/users/{id}\nPartial update"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Users (paginated)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlUser}}/api/users?page=0&size=10&sort=fullName,asc",
+              "host": [
+                "{{baseUrlUser}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ],
+              "query": [
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "10" },
+                { "key": "sort", "value": "fullName,asc" }
+              ]
+            },
+            "description": "GET /api/users\nPaginated list with sorting"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Active Users (paginated)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlUser}}/api/users/active?page=0&size=10",
+              "host": [
+                "{{baseUrlUser}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "active"
+              ],
+              "query": [
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "10" }
+              ]
+            },
+            "description": "GET /api/users/active"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlUser}}/api/users/1",
+              "host": [
+                "{{baseUrlUser}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "1"
+              ]
+            },
+            "description": "DELETE /api/users/{id}\nExpected: 204 No Content"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Restaurant Service (port 8083)",
+      "item": [
+        {
+          "name": "Create Restaurant",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Pizza Heaven\",\n  \"address\": \"вул. Дорошенка 12\",\n  \"city\": \"Львів\",\n  \"description\": \"Найкраща піца\",\n  \"openingTime\": \"10:00\",\n  \"closingTime\": \"23:00\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrlRestaurant}}/api/restaurants",
+              "host": [
+                "{{baseUrlRestaurant}}"
+              ],
+              "path": [
+                "api",
+                "restaurants"
+              ]
+            },
+            "description": "POST /api/restaurants\nCreates new restaurant"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Restaurant by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlRestaurant}}/api/restaurants/1",
+              "host": [
+                "{{baseUrlRestaurant}}"
+              ],
+              "path": [
+                "api",
+                "restaurants",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Restaurants (paginated)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlRestaurant}}/api/restaurants?page=0&size=10&sort=name,asc",
+              "host": [
+                "{{baseUrlRestaurant}}"
+              ],
+              "path": [
+                "api",
+                "restaurants"
+              ],
+              "query": [
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "10" },
+                { "key": "sort", "value": "name,asc" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Restaurant (PATCH)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Оновлений опис\",\n  \"closingTime\": \"00:00\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrlRestaurant}}/api/restaurants/1",
+              "host": [
+                "{{baseUrlRestaurant}}"
+              ],
+              "path": [
+                "api",
+                "restaurants",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Restaurant",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlRestaurant}}/api/restaurants/1",
+              "host": [
+                "{{baseUrlRestaurant}}"
+              ],
+              "path": [
+                "api",
+                "restaurants",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Category for Restaurant",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Піца\",\n  \"displayOrder\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrlRestaurant}}/api/restaurants/1/categories",
+              "host": [
+                "{{baseUrlRestaurant}}"
+              ],
+              "path": [
+                "api",
+                "restaurants",
+                "1",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Categories for Restaurant",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlRestaurant}}/api/restaurants/1/categories",
+              "host": [
+                "{{baseUrlRestaurant}}"
+              ],
+              "path": [
+                "api",
+                "restaurants",
+                "1",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Category",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Піца класична\",\n  \"displayOrder\": 0\n}"
+            },
+            "url": {
+              "raw": "{{baseUrlRestaurant}}/api/categories/1",
+              "host": [
+                "{{baseUrlRestaurant}}"
+              ],
+              "path": [
+                "api",
+                "categories",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Menu Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Маргарита\",\n  \"description\": \"Класична\",\n  \"price\": 169.00,\n  \"available\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrlRestaurant}}/api/restaurants/1/categories/1/items",
+              "host": [
+                "{{baseUrlRestaurant}}"
+              ],
+              "path": [
+                "api",
+                "restaurants",
+                "1",
+                "categories",
+                "1",
+                "items"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Menu Items for Restaurant",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlRestaurant}}/api/restaurants/1/items?page=0&size=10",
+              "host": [
+                "{{baseUrlRestaurant}}"
+              ],
+              "path": [
+                "api",
+                "restaurants",
+                "1",
+                "items"
+              ],
+              "query": [
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "10" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Menu Item",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price\": 179.00,\n  \"available\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrlRestaurant}}/api/items/1",
+              "host": [
+                "{{baseUrlRestaurant}}"
+              ],
+              "path": [
+                "api",
+                "items",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Menu Item",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlRestaurant}}/api/items/1",
+              "host": [
+                "{{baseUrlRestaurant}}"
+              ],
+              "path": [
+                "api",
+                "items",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrlUser",
+      "value": "http://localhost:8082",
+      "type": "string"
+    },
+    {
+      "key": "baseUrlRestaurant",
+      "value": "http://localhost:8083",
+      "type": "string"
+    }
+  ]
+}
