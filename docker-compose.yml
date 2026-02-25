@@ -1,7 +1,7 @@
 
 services:
   postgres:
-    image: postgres:18
+    image: postgres:17-alpine
     container_name: postgres-food-delivery
     restart: unless-stopped
     environment:
@@ -11,9 +11,9 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - pgdata:/var/lib/postgresql          # ← this is correct for postgres 18+
+      - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d deliverydb"]
       interval: 5s
       timeout: 5s
       retries: 20
@@ -34,19 +34,21 @@ services:
       SERVER_PORT: 8082          # important — matches internal port
       SPRING_APPLICATION_NAME: user-service
 
-#  app:
-#    build: .
-#    container_name: food-delivery-app
-#    restart: unless-stopped
-#    depends_on:
-#      postgres:
-#        condition: service_healthy
-#    environment:
-#      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/deliverydb
-#      SPRING_DATASOURCE_USERNAME: postgres
-#      SPRING_DATASOURCE_PASSWORD: postgres
-#    ports:
-#      - "8080:8080"
+  restaurant-service:
+    build: ./restaurant-service        # looks for Dockerfile in restaurant-service folder
+    container_name: restaurant-service
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8083:8083"              # different external port
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/deliverydb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SERVER_PORT: 8083          # important — matches internal port
+      SPRING_APPLICATION_NAME: restaurant-service
 
 volumes:
   pgdata:

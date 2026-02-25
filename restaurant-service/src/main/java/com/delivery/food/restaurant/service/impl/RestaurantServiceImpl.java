@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class RestaurantServiceImpl implements RestaurantService {
+
     private final RestaurantRepository restaurantRepository;
     private final MenuCategoryRepository menuCategoryRepository;
     private final MenuItemRepository menuItemRepository;

@@ -31,8 +31,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
      *
      * @param id the user primary key (ID) to check
      * @return Optional<User> if found, empty otherwise
-     */
-    Optional<User> findById(Long id);
+     *//*
+    Optional<User> findById(Long id);*/
 
     /**
      * Finds users by active status with pagination.

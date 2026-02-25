@@ -21,8 +21,8 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    @Override
     @Transactional
+    @Override
     public UserResponseDto create(UserCreateDto dto) {
         User user = userMapper.toEntity(dto);
         user.setRole(dto.getRole() != null ? dto.getRole() : User.Role.CUSTOMER);
@@ -31,8 +31,8 @@ public class UserServiceImpl implements UserService {
         return userMapper.toResponseDto(saved);
     }
 
-    @Override
     @Transactional(readOnly = true)
+    @Override
     public UserResponseDto findById(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
@@ -40,31 +40,30 @@ public class UserServiceImpl implements UserService {
         return userMapper.toResponseDto(user);
     }
 
-    @Override
     @Transactional(readOnly = true)
+    @Override
     public UserResponseDto findByEmail(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new EntityNotFoundException("User not found by email: " + email));
         return userMapper.toResponseDto(user);
     }
 
-
-    @Override
     @Transactional(readOnly = true)
+    @Override
     public Page<UserResponseDto> findAll(Pageable pageable) {
         return userRepository.findAll(pageable)
                 .map(userMapper::toResponseDto);
     }
 
-    @Override
     @Transactional(readOnly = true)
+    @Override
     public Page<UserResponseDto> findAllByActive(boolean active, Pageable pageable) {
         return userRepository.findByActive(active, pageable)
                 .map(userMapper::toResponseDto);
     }
 
-    @Override
     @Transactional
+    @Override
     public UserResponseDto update(Long id, UserUpdateDto dto) {
         User user  = userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
