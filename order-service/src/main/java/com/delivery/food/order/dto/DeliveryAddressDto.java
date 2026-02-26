@@ -27,7 +27,4 @@ public class DeliveryAddressDto {
     @NotBlank(message = "City is required")
     @Size(max = 100)
     private String city;
-
-    @Size(max = 500)
-    private String comment;
 }

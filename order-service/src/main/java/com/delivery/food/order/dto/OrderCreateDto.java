@@ -52,6 +52,9 @@ public class OrderCreateDto {
     @Positive(message = "Restaurant ID must be positive")
     private Long restaurantId;
 
+    @NotNull(message = "Restaurant name is required")
+    private String restaurantName;
+
     @NotNull(message = "Delivery address is required")
     @Valid
     private DeliveryAddressDto deliveryAddress;

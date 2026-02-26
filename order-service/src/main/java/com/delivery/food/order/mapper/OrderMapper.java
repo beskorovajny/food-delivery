@@ -23,6 +23,13 @@ public interface OrderMapper {
 
     OrderResponseDto toResponseDto(Order order);
 
+    @AfterMapping
+    default void afterToEntity(@MappingTarget Order order) {
+        if (order.getItems() != null) {
+            order.getItems().forEach(item -> item.setOrder(order));
+        }
+    }
+
     // Order item
     OrderItem toEntity(OrderItemCreateDto dto);
 

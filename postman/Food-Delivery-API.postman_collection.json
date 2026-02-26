@@ -1,8 +1,8 @@
 {
   "info": {
-    "_postman_id": "food-delivery-user-restaurant",
-    "name": "Food Delivery API - User & Restaurant",
-    "description": "Postman collection for UserController and RestaurantController endpoints\n\nBase URL: http://localhost:{port}\n\n- User service: port 8082\n- Restaurant service: port 8083\n\nUse variables: {{baseUrlUser}}, {{baseUrlRestaurant}}",
+    "_postman_id": "food-delivery-full",
+    "name": "Food Delivery API - Full (User, Restaurant, Order)",
+    "description": "Postman collection for User (8082), Restaurant (8083), and Order (8084) services\n\nVariables:\n- {{baseUrlUser}} = http://localhost:8082\n- {{baseUrlRestaurant}} = http://localhost:8083\n- {{baseUrlOrder}} = http://localhost:8084",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -25,15 +25,10 @@
             },
             "url": {
               "raw": "{{baseUrlUser}}/api/users",
-              "host": [
-                "{{baseUrlUser}}"
-              ],
-              "path": [
-                "api",
-                "users"
-              ]
+              "host": ["{{baseUrlUser}}"],
+              "path": ["api", "users"]
             },
-            "description": "POST /api/users\nCreates a new user (Customer by default)\n\nExpected: 201 Created + UserResponseDto"
+            "description": "POST /api/users\nCreates a new user (Customer by default)"
           },
           "response": []
         },
@@ -44,16 +39,9 @@
             "header": [],
             "url": {
               "raw": "{{baseUrlUser}}/api/users/1",
-              "host": [
-                "{{baseUrlUser}}"
-              ],
-              "path": [
-                "api",
-                "users",
-                "1"
-              ]
-            },
-            "description": "GET /api/users/{id}\nReturns user details or 404"
+              "host": ["{{baseUrlUser}}"],
+              "path": ["api", "users", "1"]
+            }
           },
           "response": []
         },
@@ -64,17 +52,9 @@
             "header": [],
             "url": {
               "raw": "{{baseUrlUser}}/api/users/email/anna.kovalenko@example.com",
-              "host": [
-                "{{baseUrlUser}}"
-              ],
-              "path": [
-                "api",
-                "users",
-                "email",
-                "anna.kovalenko@example.com"
-              ]
-            },
-            "description": "GET /api/users/email/{email}"
+              "host": ["{{baseUrlUser}}"],
+              "path": ["api", "users", "email", "anna.kovalenko@example.com"]
+            }
           },
           "response": []
         },
@@ -94,16 +74,9 @@
             },
             "url": {
               "raw": "{{baseUrlUser}}/api/users/1",
-              "host": [
-                "{{baseUrlUser}}"
-              ],
-              "path": [
-                "api",
-                "users",
-                "1"
-              ]
-            },
-            "description": "PATCH /api/users/{id}\nPartial update"
+              "host": ["{{baseUrlUser}}"],
+              "path": ["api", "users", "1"]
+            }
           },
           "response": []
         },
@@ -114,20 +87,14 @@
             "header": [],
             "url": {
               "raw": "{{baseUrlUser}}/api/users?page=0&size=10&sort=fullName,asc",
-              "host": [
-                "{{baseUrlUser}}"
-              ],
-              "path": [
-                "api",
-                "users"
-              ],
+              "host": ["{{baseUrlUser}}"],
+              "path": ["api", "users"],
               "query": [
-                { "key": "page", "value": "0" },
-                { "key": "size", "value": "10" },
-                { "key": "sort", "value": "fullName,asc" }
+                {"key": "page", "value": "0"},
+                {"key": "size", "value": "10"},
+                {"key": "sort", "value": "fullName,asc"}
               ]
-            },
-            "description": "GET /api/users\nPaginated list with sorting"
+            }
           },
           "response": []
         },
@@ -138,20 +105,13 @@
             "header": [],
             "url": {
               "raw": "{{baseUrlUser}}/api/users/active?page=0&size=10",
-              "host": [
-                "{{baseUrlUser}}"
-              ],
-              "path": [
-                "api",
-                "users",
-                "active"
-              ],
+              "host": ["{{baseUrlUser}}"],
+              "path": ["api", "users", "active"],
               "query": [
-                { "key": "page", "value": "0" },
-                { "key": "size", "value": "10" }
+                {"key": "page", "value": "0"},
+                {"key": "size", "value": "10"}
               ]
-            },
-            "description": "GET /api/users/active"
+            }
           },
           "response": []
         },
@@ -162,16 +122,9 @@
             "header": [],
             "url": {
               "raw": "{{baseUrlUser}}/api/users/1",
-              "host": [
-                "{{baseUrlUser}}"
-              ],
-              "path": [
-                "api",
-                "users",
-                "1"
-              ]
-            },
-            "description": "DELETE /api/users/{id}\nExpected: 204 No Content"
+              "host": ["{{baseUrlUser}}"],
+              "path": ["api", "users", "1"]
+            }
           },
           "response": []
         }
@@ -185,10 +138,7 @@
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              {"key": "Content-Type", "value": "application/json"}
             ],
             "body": {
               "mode": "raw",
@@ -196,15 +146,9 @@
             },
             "url": {
               "raw": "{{baseUrlRestaurant}}/api/restaurants",
-              "host": [
-                "{{baseUrlRestaurant}}"
-              ],
-              "path": [
-                "api",
-                "restaurants"
-              ]
-            },
-            "description": "POST /api/restaurants\nCreates new restaurant"
+              "host": ["{{baseUrlRestaurant}}"],
+              "path": ["api", "restaurants"]
+            }
           },
           "response": []
         },
@@ -215,14 +159,8 @@
             "header": [],
             "url": {
               "raw": "{{baseUrlRestaurant}}/api/restaurants/1",
-              "host": [
-                "{{baseUrlRestaurant}}"
-              ],
-              "path": [
-                "api",
-                "restaurants",
-                "1"
-              ]
+              "host": ["{{baseUrlRestaurant}}"],
+              "path": ["api", "restaurants", "1"]
             }
           },
           "response": []
@@ -234,17 +172,12 @@
             "header": [],
             "url": {
               "raw": "{{baseUrlRestaurant}}/api/restaurants?page=0&size=10&sort=name,asc",
-              "host": [
-                "{{baseUrlRestaurant}}"
-              ],
-              "path": [
-                "api",
-                "restaurants"
-              ],
+              "host": ["{{baseUrlRestaurant}}"],
+              "path": ["api", "restaurants"],
               "query": [
-                { "key": "page", "value": "0" },
-                { "key": "size", "value": "10" },
-                { "key": "sort", "value": "name,asc" }
+                {"key": "page", "value": "0"},
+                {"key": "size", "value": "10"},
+                {"key": "sort", "value": "name,asc"}
               ]
             }
           },
@@ -255,10 +188,7 @@
           "request": {
             "method": "PATCH",
             "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              {"key": "Content-Type", "value": "application/json"}
             ],
             "body": {
               "mode": "raw",
@@ -266,14 +196,8 @@
             },
             "url": {
               "raw": "{{baseUrlRestaurant}}/api/restaurants/1",
-              "host": [
-                "{{baseUrlRestaurant}}"
-              ],
-              "path": [
-                "api",
-                "restaurants",
-                "1"
-              ]
+              "host": ["{{baseUrlRestaurant}}"],
+              "path": ["api", "restaurants", "1"]
             }
           },
           "response": []
@@ -285,14 +209,8 @@
             "header": [],
             "url": {
               "raw": "{{baseUrlRestaurant}}/api/restaurants/1",
-              "host": [
-                "{{baseUrlRestaurant}}"
-              ],
-              "path": [
-                "api",
-                "restaurants",
-                "1"
-              ]
+              "host": ["{{baseUrlRestaurant}}"],
+              "path": ["api", "restaurants", "1"]
             }
           },
           "response": []
@@ -302,10 +220,7 @@
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              {"key": "Content-Type", "value": "application/json"}
             ],
             "body": {
               "mode": "raw",
@@ -313,15 +228,8 @@
             },
             "url": {
               "raw": "{{baseUrlRestaurant}}/api/restaurants/1/categories",
-              "host": [
-                "{{baseUrlRestaurant}}"
-              ],
-              "path": [
-                "api",
-                "restaurants",
-                "1",
-                "categories"
-              ]
+              "host": ["{{baseUrlRestaurant}}"],
+              "path": ["api", "restaurants", "1", "categories"]
             }
           },
           "response": []
@@ -333,15 +241,8 @@
             "header": [],
             "url": {
               "raw": "{{baseUrlRestaurant}}/api/restaurants/1/categories",
-              "host": [
-                "{{baseUrlRestaurant}}"
-              ],
-              "path": [
-                "api",
-                "restaurants",
-                "1",
-                "categories"
-              ]
+              "host": ["{{baseUrlRestaurant}}"],
+              "path": ["api", "restaurants", "1", "categories"]
             }
           },
           "response": []
@@ -351,10 +252,7 @@
           "request": {
             "method": "PATCH",
             "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              {"key": "Content-Type", "value": "application/json"}
             ],
             "body": {
               "mode": "raw",
@@ -362,14 +260,8 @@
             },
             "url": {
               "raw": "{{baseUrlRestaurant}}/api/categories/1",
-              "host": [
-                "{{baseUrlRestaurant}}"
-              ],
-              "path": [
-                "api",
-                "categories",
-                "1"
-              ]
+              "host": ["{{baseUrlRestaurant}}"],
+              "path": ["api", "categories", "1"]
             }
           },
           "response": []
@@ -379,10 +271,7 @@
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              {"key": "Content-Type", "value": "application/json"}
             ],
             "body": {
               "mode": "raw",
@@ -390,40 +279,24 @@
             },
             "url": {
               "raw": "{{baseUrlRestaurant}}/api/restaurants/1/categories/1/items",
-              "host": [
-                "{{baseUrlRestaurant}}"
-              ],
-              "path": [
-                "api",
-                "restaurants",
-                "1",
-                "categories",
-                "1",
-                "items"
-              ]
+              "host": ["{{baseUrlRestaurant}}"],
+              "path": ["api", "restaurants", "1", "categories", "1", "items"]
             }
           },
           "response": []
         },
         {
-          "name": "Get Menu Items for Restaurant",
+          "name": "Get Menu Items for Restaurant (paginated)",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
               "raw": "{{baseUrlRestaurant}}/api/restaurants/1/items?page=0&size=10",
-              "host": [
-                "{{baseUrlRestaurant}}"
-              ],
-              "path": [
-                "api",
-                "restaurants",
-                "1",
-                "items"
-              ],
+              "host": ["{{baseUrlRestaurant}}"],
+              "path": ["api", "restaurants", "1", "items"],
               "query": [
-                { "key": "page", "value": "0" },
-                { "key": "size", "value": "10" }
+                {"key": "page", "value": "0"},
+                {"key": "size", "value": "10"}
               ]
             }
           },
@@ -434,10 +307,7 @@
           "request": {
             "method": "PATCH",
             "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              {"key": "Content-Type", "value": "application/json"}
             ],
             "body": {
               "mode": "raw",
@@ -445,14 +315,8 @@
             },
             "url": {
               "raw": "{{baseUrlRestaurant}}/api/items/1",
-              "host": [
-                "{{baseUrlRestaurant}}"
-              ],
-              "path": [
-                "api",
-                "items",
-                "1"
-              ]
+              "host": ["{{baseUrlRestaurant}}"],
+              "path": ["api", "items", "1"]
             }
           },
           "response": []
@@ -464,15 +328,203 @@
             "header": [],
             "url": {
               "raw": "{{baseUrlRestaurant}}/api/items/1",
-              "host": [
-                "{{baseUrlRestaurant}}"
-              ],
-              "path": [
-                "api",
-                "items",
-                "1"
-              ]
+              "host": ["{{baseUrlRestaurant}}"],
+              "path": ["api", "items", "1"]
             }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Order Service (port 8084)",
+      "item": [
+        {
+          "name": "Create Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwtToken}}",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": 1,\n  \"restaurantId\": 1,\n  \"deliveryAddress\": {\n    \"street\": \"Doroshenka\",\n    \"house\": \"12\",\n    \"apartment\": \"5A\",\n    \"city\": \"Lviv\",\n    \"comment\": \"Leave at the door\"\n  },\n  \"items\": [\n    {\n      \"menuItemId\": 10,\n      \"quantity\": 2\n    },\n    {\n      \"menuItemId\": 15,\n      \"quantity\": 1\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrlOrder}}/api/orders",
+              "host": ["{{baseUrlOrder}}"],
+              "path": ["api", "orders"]
+            },
+            "description": "POST /api/orders\nCreates a new order (requires CUSTOMER role)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Order by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwtToken}}",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrlOrder}}/api/orders/1",
+              "host": ["{{baseUrlOrder}}"],
+              "path": ["api", "orders", "1"]
+            },
+            "description": "GET /api/orders/{orderId}\nReturns order details (customer owns it or restaurant/admin)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Orders (paginated)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwtToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrlOrder}}/api/orders/my-orders?page=0&size=10&sort=createdAt,desc",
+              "host": ["{{baseUrlOrder}}"],
+              "path": ["api", "orders", "my-orders"],
+              "query": [
+                {"key": "page", "value": "0"},
+                {"key": "size", "value": "10"},
+                {"key": "sort", "value": "createdAt,desc"}
+              ]
+            },
+            "description": "GET /api/orders/my-orders\nPaginated list of current customer's orders (CUSTOMER only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Orders by Restaurant (paginated)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwtToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrlOrder}}/api/orders/restaurant/1?page=0&size=10&sort=createdAt,desc",
+              "host": ["{{baseUrlOrder}}"],
+              "path": ["api", "orders", "restaurant", "1"],
+              "query": [
+                {"key": "page", "value": "0"},
+                {"key": "size", "value": "10"},
+                {"key": "sort", "value": "createdAt,desc"}
+              ]
+            },
+            "description": "GET /api/orders/restaurant/{restaurantId}\nPaginated orders for a restaurant (RESTAURANT_OWNER or ADMIN)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Orders by Status (paginated)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwtToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrlOrder}}/api/orders/status/NEW?page=0&size=10",
+              "host": ["{{baseUrlOrder}}"],
+              "path": ["api", "orders", "status", "NEW"],
+              "query": [
+                {"key": "page", "value": "0"},
+                {"key": "size", "value": "10"}
+              ]
+            },
+            "description": "GET /api/orders/status/{status}\nPaginated orders by status (ADMIN only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Order Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwtToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"newStatus\": \"CONFIRMED\",\n  \"reason\": \"Customer requested\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrlOrder}}/api/orders/1/status",
+              "host": ["{{baseUrlOrder}}"],
+              "path": ["api", "orders", "1", "status"]
+            },
+            "description": "PATCH /api/orders/{orderId}/status\nUpdates order status (RESTAURANT_OWNER, DELIVERY, ADMIN)"
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel Order",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwtToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrlOrder}}/api/orders/1/cancel",
+              "host": ["{{baseUrlOrder}}"],
+              "path": ["api", "orders", "1", "cancel"]
+            },
+            "description": "PATCH /api/orders/{orderId}/cancel\nCancels order (CUSTOMER only, early stages)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Active Orders (paginated)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwtToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrlOrder}}/api/orders/my-active-orders?page=0&size=10&sort=createdAt,desc",
+              "host": ["{{baseUrlOrder}}"],
+              "path": ["api", "orders", "my-active-orders"],
+              "query": [
+                {"key": "page", "value": "0"},
+                {"key": "size", "value": "10"},
+                {"key": "sort", "value": "createdAt,desc"}
+              ]
+            },
+            "description": "GET /api/orders/my-active-orders\nPaginated active (non-final) orders for current customer"
           },
           "response": []
         }
@@ -489,6 +541,17 @@
       "key": "baseUrlRestaurant",
       "value": "http://localhost:8083",
       "type": "string"
+    },
+    {
+      "key": "baseUrlOrder",
+      "value": "http://localhost:8084",
+      "type": "string"
+    },
+    {
+      "key": "jwtToken",
+      "value": "",
+      "type": "string",
+      "description": "Paste your JWT token here after login (Bearer prefix not needed)"
     }
   ]
 }

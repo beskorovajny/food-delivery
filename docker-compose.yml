@@ -19,7 +19,9 @@ services:
       retries: 20
 
   user-service:
-    build: ./user-service        # looks for Dockerfile in user-service folder
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile # looks for Dockerfile in user-service folder
     container_name: user-service
     restart: unless-stopped
     depends_on:
@@ -35,7 +37,9 @@ services:
       SPRING_APPLICATION_NAME: user-service
 
   restaurant-service:
-    build: ./restaurant-service        # looks for Dockerfile in restaurant-service folder
+    build:
+      context: ./restaurant-service
+      dockerfile: Dockerfile # looks for Dockerfile in restaurant-service folder
     container_name: restaurant-service
     restart: unless-stopped
     depends_on:
@@ -49,6 +53,24 @@ services:
       SPRING_DATASOURCE_PASSWORD: postgres
       SERVER_PORT: 8083          # important — matches internal port
       SPRING_APPLICATION_NAME: restaurant-service
+
+  order-service:
+    build:
+      context: ./order-service
+      dockerfile: Dockerfile # looks for Dockerfile in user-service folder
+    container_name: order-service
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8084:8084"              # different external port
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/deliverydb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SERVER_PORT: 8084         # important — matches internal port
+      SPRING_APPLICATION_NAME: order-service
 
 volumes:
   pgdata:

@@ -18,6 +18,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -33,6 +36,26 @@ public class OrderServiceImpl implements OrderService {
         log.debug("Creating order for customer Id: {}", dto.getCustomerId());
 
         Order order = orderMapper.toEntity(dto);
+        order.setStatus(OrderStatus.NEW);
+
+        /*order.getItems().forEach(item -> {
+            if (item.getSubtotal() == null) {
+                item.calculateSubtotal(); // force calculation
+            }
+        });*/
+
+        // Mock prices/names (temporary!)
+        Order finalOrder = order;
+        order.getItems().forEach(item -> {
+            item.setMenuItemName("Mock Item " + item.getMenuItemId());
+            item.setPriceAtOrderTime(BigDecimal.valueOf(100.00)); // mock
+            item.setSubtotal(item.getPriceAtOrderTime().multiply(BigDecimal.valueOf(item.getQuantity())));
+            item.setOrder(finalOrder);
+        });
+
+        order.calculateTotal();
+        order.setCreatedAt(LocalDateTime.now());
+
         order = orderRepository.save(order);
 
         log.info("Order created: id={}, customer id={}", order.getId(), order.getCustomerId());

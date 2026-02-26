@@ -14,6 +14,16 @@ import java.math.BigDecimal;
 @Builder
 public class OrderItem {
 
+    public OrderItem(Long menuItemId, String menuItemName, BigDecimal priceAtOrderTime, Integer quantity) {
+        this.menuItemId = menuItemId;
+        this.menuItemName = menuItemName;
+        this.priceAtOrderTime = priceAtOrderTime;
+        this.quantity = quantity != null ? quantity : 1;
+        if (this.subtotal == null) {
+            calculateSubtotal();
+        }
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -42,6 +52,10 @@ public class OrderItem {
     @PrePersist
     @PreUpdate
     public void calculateSubtotal() {
-        subtotal = priceAtOrderTime.multiply(BigDecimal.valueOf(quantity));
+        if (priceAtOrderTime != null && quantity != null) {
+            this.subtotal = priceAtOrderTime.multiply(BigDecimal.valueOf(quantity));
+        } else {
+            this.subtotal = BigDecimal.ZERO; // fallback
+        }
     }
 }

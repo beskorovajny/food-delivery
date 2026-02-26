@@ -22,6 +22,4 @@ public class DeliveryAddress {
 
     @Column(nullable = false)
     private String city;
-
-    private String comment;
 }
