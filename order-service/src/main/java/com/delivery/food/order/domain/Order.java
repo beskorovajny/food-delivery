@@ -28,7 +28,7 @@ public class Order {
     private Long restaurantId;         // foreign key to restaurant-service
 
     @Column(nullable = false)
-    private String restaurantName;     // denormalized copy (for read performance)
+    private String restaurantName;      // denormalized copy (for read performance)
 
     @Embedded
     private DeliveryAddress deliveryAddress;  // value object (see below)

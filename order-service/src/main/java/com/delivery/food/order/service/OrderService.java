@@ -6,6 +6,7 @@ import com.delivery.food.order.domain.Order;
 import com.delivery.food.order.domain.OrderStatus;
 import com.delivery.food.order.dto.OrderCreateDto;
 import com.delivery.food.order.dto.OrderResponseDto;
+import com.delivery.food.order.dto.OrderStatusUpdateDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -101,7 +102,7 @@ public interface OrderService {
      * @throws EntityNotFoundException if order not found
      * @throws InvalidOperationException if status transition is invalid
      */
-    OrderResponseDto updateOrderStatus(Long orderId, OrderStatus newStatus);
+    OrderResponseDto updateOrderStatus(Long orderId, OrderStatusUpdateDto statusUpdateDto);
 
     /**
      * Cancels an order (customer or restaurant initiated).
@@ -111,11 +112,10 @@ public interface OrderService {
      * </p>
      *
      * @param orderId the order identifier
-     * @param reason optional reason for cancellation
      * @throws EntityNotFoundException if order not found
      * @throws InvalidOperationException if order cannot be cancelled (already delivered, etc.)
      */
-    void cancelOrder(Long orderId, String reason);
+    void cancelOrder(Long orderId);
 
     /**
      * Retrieves paginated list of active (not delivered/cancelled) orders for a customer.
