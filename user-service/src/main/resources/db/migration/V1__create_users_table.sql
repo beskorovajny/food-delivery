@@ -1,0 +1,11 @@
+CREATE TABLE users (
+                       id BIGSERIAL PRIMARY KEY,
+                       email VARCHAR(255) UNIQUE NOT NULL,
+                       full_name VARCHAR(100) NOT NULL,
+                       phone VARCHAR(20),
+                       role VARCHAR(50) NOT NULL DEFAULT 'CUSTOMER',
+                       active BOOLEAN DEFAULT TRUE NOT NULL,
+                       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE INDEX idx_users_email ON users(email);
