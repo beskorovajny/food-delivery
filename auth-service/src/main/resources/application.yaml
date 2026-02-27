@@ -1,0 +1,4 @@
+jwt:
+  secret: 0b2db89e73e17c93cbcd479b8790c87cd142fce98d0332a83c21e19fc8d22be1
+  expiration: 900000     # 15 min for access token
+  refresh.expiration: 604800000  # 7 days for refresh

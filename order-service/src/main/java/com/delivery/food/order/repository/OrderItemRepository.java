@@ -3,6 +3,7 @@ package com.delivery.food.order.repository;
 import com.delivery.food.order.domain.Order;
 import com.delivery.food.order.domain.OrderItem;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -21,6 +22,8 @@ import java.util.List;
  *     <li>For complex reporting consider projections or QueryDSL later</li>
  * </ul>
  */
+
+@Repository
 public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
 
     /**

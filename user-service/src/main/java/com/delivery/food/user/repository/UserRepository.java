@@ -4,6 +4,7 @@ import com.delivery.food.user.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ import java.util.Optional;
  * For complex filters, consider JpaSpecificationExecutor or @Query.
  * </p>
  */
+@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
     /**
@@ -25,14 +27,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @return Optional<User> if found, empty otherwise
      */
     Optional<User> findByEmail(String email);
-
-    /**
-     * Find a user by primary key (ID)
-     *
-     * @param id the user primary key (ID) to check
-     * @return Optional<User> if found, empty otherwise
-     *//*
-    Optional<User> findById(Long id);*/
 
     /**
      * Finds users by active status with pagination.
