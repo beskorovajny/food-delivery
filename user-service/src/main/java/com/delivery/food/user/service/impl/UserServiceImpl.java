@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     @Override
@@ -33,7 +36,8 @@ public class UserServiceImpl implements UserService {
             throw new DuplicateEntityException("User with email " + dto.getEmail() + " already exists");
         });
         User user = userMapper.toEntity(dto);
-        user.setRole(dto.getRole() != null ? dto.getRole() : User.Role.CUSTOMER);
+        user.setRole(User.Role.CUSTOMER);
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.setActive(true);
         User saved = userRepository.save(user);
 

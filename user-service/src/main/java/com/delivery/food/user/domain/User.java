@@ -21,6 +21,9 @@ public class User {
     @Column(nullable = false)
     private String fullName;
 
+    @Column(name = "password", nullable = false)
+    private String password;
+
     private String phone;
 
     @Enumerated(EnumType.STRING)

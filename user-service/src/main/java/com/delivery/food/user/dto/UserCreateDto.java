@@ -27,6 +27,9 @@ public class UserCreateDto {
     @Pattern(regexp = "^\\+?\\d{9,15}$", message = "Invalid phone number")
     private String phone;
 
-    private User.Role role;  // optional – default to CUSTOMER in service
-
+    @NotBlank(message = "Password is required")
+    @Size(min = 8, max = 50, message = "Password must be 8–50 characters")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$",
+            message = "Password must contain at least one uppercase letter, one lowercase letter, and one digit")
+    private String password;
 }

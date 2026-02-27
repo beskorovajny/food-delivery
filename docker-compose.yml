@@ -72,5 +72,23 @@ services:
       SERVER_PORT: 8084         # important — matches internal port
       SPRING_APPLICATION_NAME: order-service
 
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile # looks for Dockerfile in user-service folder
+    container_name: auth-service
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8085:8085"              # different external port
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/deliverydb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SERVER_PORT: 8085         # important — matches internal port
+      SPRING_APPLICATION_NAME: auth-service
+
 volumes:
   pgdata:

@@ -3,6 +3,7 @@ package com.delivery.food.auth.service;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +17,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Slf4j
+@Data
 @Service
 public class JwtService {
 
@@ -26,7 +28,7 @@ public class JwtService {
     private long accessTokenExpirationMs;
 
     @Value("${jwt.refresh.expiration}")
-    private long refreshExpiration;
+    private long refreshTokenExpirationMs;
 
     public String extractUsername(String token) {
         if (token == null || token.trim().isEmpty()) {
@@ -69,7 +71,7 @@ public class JwtService {
     }
 
     public String generateRefreshToken(UserDetails userDetails) {
-        return buildToken(new HashMap<>(), userDetails, refreshExpiration);
+        return buildToken(new HashMap<>(), userDetails, refreshTokenExpirationMs);
     }
 
     private String buildToken(Map<String, Object> claims, UserDetails userDetails, long expiration) {

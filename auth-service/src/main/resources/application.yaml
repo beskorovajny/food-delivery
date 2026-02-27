@@ -1,3 +1,60 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: auth-service   # must be unique per service
+
+  datasource:
+    url: jdbc:postgresql://postgres:5432/deliverydb
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+    hikari:
+      connection-timeout: 30000           # 30s
+      validation-timeout: 5000
+      maximum-pool-size: 10               # can be 5–15 depending on expected load
+      idle-timeout: 300000                # 5 min
+      initialization-fail-timeout: 0
+      connection-test-query: SELECT 1     # forces early pool init
+
+  sql:
+    init:
+      mode: always                        # run schema.sql & data.sql on every startup (dev)
+      platform: postgresql
+      continue-on-error: false
+      schema-locations:
+        - classpath:db/schema.sql
+      data-locations:
+        - classpath:db/data.sql
+
+  jpa:
+    hibernate:
+      ddl-auto: none                      # very important — we use sql init
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+    root: INFO
+    com.delivery.food: DEBUG
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE   # shows ? = value bindings
+
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
+  file:
+    name: logs/${spring.application.name}.log
+    max-history: 7
+    max-size: 10MB
+
 jwt:
   secret: 0b2db89e73e17c93cbcd479b8790c87cd142fce98d0332a83c21e19fc8d22be1
   expiration: 900000     # 15 min for access token
